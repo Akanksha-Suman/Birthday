@@ -1,22 +1,15 @@
-/* =====================================================
-   START SURPRISE
-===================================================== */
-
 let heartsStarted = false;
 let countdownTimer = null;
 
 
+/* =====================================================
+   CRACKER SOUND
+===================================================== */
+
 function playCrackerSound() {
-
-    /*
-        Put your cracker sound here:
-
-        sounds/crackers.mp3
-    */
 
     let crackerSound =
         document.getElementById("crackerSound");
-
 
     if (!crackerSound) {
 
@@ -40,13 +33,10 @@ function playCrackerSound() {
         );
     }
 
-
     crackerSound.currentTime = 0;
-
 
     const playPromise =
         crackerSound.play();
-
 
     if (playPromise !== undefined) {
 
@@ -77,7 +67,6 @@ function createCrackerBurst() {
         "❤️"
     ];
 
-
     for (let i = 0; i < 35; i++) {
 
         const spark =
@@ -94,7 +83,6 @@ function createCrackerBurst() {
                 )
             ];
 
-
         const angle =
             Math.random() *
             Math.PI *
@@ -102,8 +90,8 @@ function createCrackerBurst() {
 
         const distance =
             Math.random() *
-            350 + 120;
-
+            350 +
+            120;
 
         const x =
             Math.cos(angle) *
@@ -112,7 +100,6 @@ function createCrackerBurst() {
         const y =
             Math.sin(angle) *
             distance;
-
 
         spark.style.setProperty(
             "--x",
@@ -124,15 +111,12 @@ function createCrackerBurst() {
             `${y}px`
         );
 
-
         spark.style.fontSize =
             `${Math.random() * 15 + 12}px`;
-
 
         document.body.appendChild(
             spark
         );
-
 
         setTimeout(() => {
 
@@ -149,20 +133,9 @@ function createCrackerBurst() {
 
 function startSurprise() {
 
-    /*
-        Sound starts directly from the
-        button click.
-    */
-
     playCrackerSound();
 
-
-    /*
-        Visual cracker burst.
-    */
-
     createCrackerBurst();
-
 
     const intro =
         document.getElementById("intro");
@@ -170,11 +143,9 @@ function startSurprise() {
     const main =
         document.getElementById("main-content");
 
-
     if (!intro || !main) {
         return;
     }
-
 
     intro.style.opacity =
         "0";
@@ -182,23 +153,19 @@ function startSurprise() {
     intro.style.transition =
         "1.5s ease";
 
-
     setTimeout(() => {
 
         intro.style.display =
             "none";
 
-
         main.classList.remove(
             "hidden"
         );
-
 
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
-
 
         if (!heartsStarted) {
 
@@ -207,7 +174,6 @@ function startSurprise() {
             heartsStarted =
                 true;
         }
-
 
     }, 1500);
 }
@@ -224,14 +190,11 @@ function updateCountdown() {
             "October 7, 2026 00:00:00"
         ).getTime();
 
-
     const now =
         new Date().getTime();
 
-
     const difference =
         birthday - now;
-
 
     const days =
         document.getElementById("days");
@@ -250,7 +213,6 @@ function updateCountdown() {
             "birthday-message"
         );
 
-
     if (
         !days ||
         !hours ||
@@ -260,7 +222,6 @@ function updateCountdown() {
         return;
     }
 
-
     if (difference <= 0) {
 
         days.innerText = "00";
@@ -268,25 +229,20 @@ function updateCountdown() {
         minutes.innerText = "00";
         seconds.innerText = "00";
 
-
         if (message) {
 
             message.innerText =
                 "TODAY IS YOUR DAY, MY CHAMPION! 🎂❤️";
-
         }
-
 
         return;
     }
-
 
     const d =
         Math.floor(
             difference /
             (1000 * 60 * 60 * 24)
         );
-
 
     const h =
         Math.floor(
@@ -295,7 +251,6 @@ function updateCountdown() {
             24
         );
 
-
     const m =
         Math.floor(
             (difference /
@@ -303,13 +258,11 @@ function updateCountdown() {
             60
         );
 
-
     const s =
         Math.floor(
             (difference / 1000) %
             60
         );
-
 
     days.innerText =
         String(d).padStart(2, "0");
@@ -326,7 +279,6 @@ function updateCountdown() {
 
 
 updateCountdown();
-
 
 countdownTimer =
     setInterval(
@@ -357,26 +309,24 @@ function toggleMusic() {
         return;
     }
 
-
     if (song.paused) {
 
         const playPromise =
             song.play();
 
-
-        if (
-            playPromise !== undefined
-        ) {
+        if (playPromise !== undefined) {
 
             playPromise
                 .then(() => {
 
                     if (musicButton) {
+
                         musicButton.innerHTML =
                             "❚❚";
                     }
 
                     if (vinyl) {
+
                         vinyl.classList.add(
                             "playing"
                         );
@@ -391,28 +341,23 @@ function toggleMusic() {
                     );
 
                 });
-
         }
 
     } else {
 
         song.pause();
 
-
         if (musicButton) {
 
             musicButton.innerHTML =
                 "▶";
-
         }
-
 
         if (vinyl) {
 
             vinyl.classList.remove(
                 "playing"
             );
-
         }
     }
 }
@@ -434,16 +379,13 @@ function openLetter() {
             "letter"
         );
 
-
     if (!envelope || !letter) {
         return;
     }
 
-
     envelope.classList.toggle(
         "open"
     );
-
 
     if (
         envelope.classList.contains(
@@ -457,12 +399,10 @@ function openLetter() {
                 "hidden"
             );
 
-
             letter.scrollIntoView({
                 behavior: "smooth",
                 block: "center"
             });
-
 
         }, 800);
 
@@ -471,7 +411,6 @@ function openLetter() {
         letter.classList.add(
             "hidden"
         );
-
     }
 }
 
@@ -486,15 +425,9 @@ function revealReason(card) {
         return;
     }
 
-
     card.classList.toggle(
         "revealed"
     );
-
-
-    /*
-       Small vibration on supported phones.
-    */
 
     if (
         card.classList.contains(
@@ -509,341 +442,92 @@ function revealReason(card) {
             navigator.vibrate(
                 40
             );
-
         }
     }
 }
 
 
 /* =====================================================
-   BLOW CANDLES
+   CANDLE ELEMENTS
 ===================================================== */
 
-// let candlesBlown =
-//     false;
+const startBtn =
+    document.getElementById(
+        "startBlowBtn"
+    );
 
+const blowText =
+    document.getElementById(
+        "blowText"
+    );
 
-// function blowCandles() {
+const birthdaySong =
+    document.getElementById(
+        "birthdaySong"
+    );
 
-//     if (candlesBlown) {
-//         return;
-//     }
+const birthdayMessage =
+    document.getElementById(
+        "birthdayMessage"
+    );
 
+const candles =
+    document.querySelectorAll(
+        ".candle"
+    );
 
-//     candlesBlown =
-//         true;
 
+/* =====================================================
+   CANDLE AUDIO VARIABLES
+===================================================== */
 
-//     const cake =
-//         document.querySelector(
-//             ".cake"
-//         );
+let audioContext = null;
 
+let analyser = null;
 
-//     if (cake) {
+let microphone = null;
 
-//         cake.classList.add(
-//             "candles-out"
-//         );
+let micStream = null;
 
-//     }
+let timeData = null;
 
-
-//     const button =
-//         document.querySelector(
-//             ".blow-btn"
-//         );
-
-
-//     if (button) {
-
-//         button.style.display =
-//             "none";
-
-//     }
-
-
-//     createFireworks();
-
-
-//     setTimeout(() => {
-
-//         const message =
-//             document.getElementById(
-//                 "final-message"
-//             );
-
-
-//         if (!message) {
-//             return;
-//         }
-
-
-//         message.classList.remove(
-//             "hidden"
-//         );
-
-
-//         message.scrollIntoView({
-//             behavior: "smooth",
-//             block: "center"
-//         });
-
-
-//     }, 1500);
-// }
-// const startBtn = document.getElementById("startBlowBtn");
-// const blowText = document.getElementById("blowText");
-// const birthdaySong = document.getElementById("birthdaySong");
-// const birthdayMessage = document.getElementById("birthdayMessage");
-
-// const candles = document.querySelectorAll(".candle");
-
-// let audioContext;
-// let analyser;
-// let microphone;
-// let dataArray;
-
-// let isListening = false;
-// let candleBlown = false;
-
-
-// /* ==========================================
-//    START MICROPHONE
-// ========================================== */
-
-// startBtn.addEventListener("click", async () => {
-
-//     try {
-
-//         const stream = await navigator.mediaDevices.getUserMedia({
-//             audio: true
-//         });
-
-//         audioContext = new AudioContext();
-
-//         microphone = audioContext.createMediaStreamSource(stream);
-
-//         analyser = audioContext.createAnalyser();
-
-//         analyser.fftSize = 512;
-
-//         dataArray = new Uint8Array(
-//             analyser.frequencyBinCount
-//         );
-
-//         microphone.connect(analyser);
-
-//         isListening = true;
-
-//         startBtn.style.display = "none";
-
-//         blowText.textContent =
-//             "💨 Now blow into your microphone!";
-
-//         detectBlow();
-
-//     } catch (error) {
-
-//         console.error(error);
-
-//         blowText.textContent =
-//             "⚠️ Please allow microphone access.";
-
-//     }
-
-// });
-
-
-// /* ==========================================
-//    DETECT BLOW
-// ========================================== */
-
-// function detectBlow() {
-
-//     if (!isListening || candleBlown) {
-//         return;
-//     }
-
-//     analyser.getByteFrequencyData(dataArray);
-
-//     let sum = 0;
-
-//     for (let i = 0; i < dataArray.length; i++) {
-//         sum += dataArray[i];
-//     }
-
-//     const average = sum / dataArray.length;
-
-
-//     /*
-//        Higher value = louder sound.
-
-//        You can adjust this number.
-//        Try 45–80 depending on microphone.
-//     */
-
-//     if (average > 55) {
-
-//         blowOutCandles();
-
-//         return;
-//     }
-
-
-//     requestAnimationFrame(detectBlow);
-// }
-
-
-// /* ==========================================
-//    BLOW OUT CANDLES
-// ========================================== */
-
-// function blowOutCandles() {
-
-//     candleBlown = true;
-//     isListening = false;
-
-//     candles.forEach((candle, index) => {
-
-//         setTimeout(() => {
-
-//             candle.classList.add("blown");
-
-//         }, index * 250);
-
-//     });
-
-
-//    blowText.textContent =
-    //    "🎉 Wish made! Happy Birthday! ❤️";
-
-//        Start song after candles go out
-//     */
-
-//     setTimeout(() => {
-
-//         birthdaySong.currentTime = 0;
-
-//         birthdaySong.play()
-//             .then(() => {
-
-//                 console.log("Birthday song started!");
-
-//             })
-//             .catch(error => {
-
-//                 console.log(
-//                     "Song could not autoplay:",
-//                     error
-//                 );
-
-//             });
-
-//     }, 800);
-
-
-//     /*
-//        Show birthday message
-//     */
-
-//     setTimeout(() => {
-
-//         birthdayMessage.classList.remove("hidden");
-
-//         createConfetti();
-
-//     }, 1200);
-
-// }
-
-
-// /* ==========================================
-//    CONFETTI
-// ========================================== */
-
-// function createConfetti() {
-
-//     for (let i = 0; i < 80; i++) {
-
-//         const confetti =
-//             document.createElement("div");
-
-//         confetti.innerHTML = "✨";
-
-//         confetti.style.position = "fixed";
-//         confetti.style.left =
-//             Math.random() * 100 + "vw";
-
-//         confetti.style.top = "-20px";
-
-//         confetti.style.fontSize =
-//             Math.random() * 20 + 10 + "px";
-
-//         confetti.style.zIndex = "200";
-
-//         confetti.style.animation =
-//             `fall ${Math.random() * 3 + 2}s linear forwards`;
-
-//         document.body.appendChild(confetti);
-
-
-//         setTimeout(() => {
-//             confetti.remove();
-//         }, 5000);
-
-//     }
-
-// }
-const startBtn = document.getElementById("startBlowBtn");
-const blowText = document.getElementById("blowText");
-const birthdaySong = document.getElementById("birthdaySong");
-const birthdayMessage = document.getElementById("birthdayMessage");
-
-const candles = document.querySelectorAll(".candle");
-
-let audioContext;
-let analyser;
-let microphone;
-let dataArray;
+let frequencyData = null;
 
 let isListening = false;
+
 let candleBlown = false;
 
+let noiseLevel = 0.02;
 
-/* ==========================================
-   START MICROPHONE + UNLOCK SONG
-========================================== */
+let blowFrames = 0;
 
-startBtn.addEventListener("click", async () => {
+let audioUnlocked = false;
+
+
+/* =====================================================
+   UNLOCK BIRTHDAY SONG
+   IMPORTANT FOR MOBILE
+===================================================== */
+
+async function unlockBirthdaySong() {
+
+    if (!birthdaySong) {
+        return;
+    }
 
     try {
-
-        // Ask for microphone permission
-        const stream = await navigator.mediaDevices.getUserMedia({
-            audio: true
-        });
-
-        // Create audio context
-        audioContext = new (window.AudioContext ||
-            window.webkitAudioContext)();
-
-        if (audioContext.state === "suspended") {
-            await audioContext.resume();
-        }
-
-
-        /* --------------------------------------
-           IMPORTANT:
-           Unlock the audio element while this
-           click is still considered a user action.
-        -------------------------------------- */
 
         birthdaySong.volume = 0.8;
 
         birthdaySong.muted = true;
 
-        await birthdaySong.play();
+        const playPromise =
+            birthdaySong.play();
+
+        if (playPromise !== undefined) {
+
+            await playPromise;
+        }
 
         birthdaySong.pause();
 
@@ -851,282 +535,1136 @@ startBtn.addEventListener("click", async () => {
 
         birthdaySong.muted = false;
 
+        audioUnlocked = true;
 
-        // Microphone analyser
-        microphone =
-            audioContext.createMediaStreamSource(stream);
-
-        analyser =
-            audioContext.createAnalyser();
-
-        analyser.fftSize = 512;
-
-        dataArray =
-            new Uint8Array(analyser.frequencyBinCount);
-
-        microphone.connect(analyser);
-
-        isListening = true;
-
-        startBtn.style.display = "none";
-
-        blowText.textContent =
-            "💨 Blow into the microphone!";
-
-        detectBlow();
+        console.log(
+            "🎵 Birthday song unlocked!"
+        );
 
     }
 
     catch (error) {
 
-        console.error("Microphone error:", error);
+        console.log(
+            "Birthday song unlock:",
+            error
+        );
 
-        blowText.textContent =
-            "⚠️ Please allow microphone access and try again.";
-
+        audioUnlocked = false;
     }
+}
 
-});
+
+/* =====================================================
+   START BUTTON
+===================================================== */
+
+if (startBtn) {
+
+    startBtn.addEventListener(
+        "click",
+        startCandleDetection
+    );
+}
 
 
-/* ==========================================
-   DETECT BLOW
-========================================== */
+/* =====================================================
+   START CANDLE DETECTION
+===================================================== */
 
-function detectBlow() {
+async function startCandleDetection() {
 
-    if (!isListening || candleBlown) {
+    if (
+        isListening ||
+        candleBlown
+    ) {
         return;
     }
 
-    analyser.getByteFrequencyData(dataArray);
+    try {
 
-    let sum = 0;
+        /* -----------------------------------------
+           Check browser microphone support
+        ----------------------------------------- */
 
-    for (let i = 0; i < dataArray.length; i++) {
-        sum += dataArray[i];
+        if (
+            !navigator.mediaDevices ||
+            !navigator.mediaDevices.getUserMedia
+        ) {
+
+            if (blowText) {
+
+                blowText.textContent =
+                    "⚠️ Microphone is not supported here.";
+            }
+
+            showManualBlowButton();
+
+            return;
+        }
+
+
+        /* -----------------------------------------
+           Check secure connection
+        ----------------------------------------- */
+
+        if (
+            location.protocol !== "https:" &&
+            location.hostname !== "localhost" &&
+            location.hostname !== "127.0.0.1"
+        ) {
+
+            if (blowText) {
+
+                blowText.textContent =
+                    "⚠️ Please open this website using HTTPS.";
+            }
+
+            showManualBlowButton();
+
+            return;
+        }
+
+
+        /* -----------------------------------------
+           Unlock birthday audio FIRST
+           while this is still a user click
+        ----------------------------------------- */
+
+        await unlockBirthdaySong();
+
+
+        /* -----------------------------------------
+           Request microphone
+        ----------------------------------------- */
+
+        micStream =
+            await navigator.mediaDevices.getUserMedia({
+
+                audio: {
+
+                    echoCancellation: false,
+
+                    noiseSuppression: false,
+
+                    autoGainControl: false
+                }
+            });
+
+
+        console.log(
+            "🎤 Microphone permission granted!"
+        );
+
+
+        /* -----------------------------------------
+           Create AudioContext
+        ----------------------------------------- */
+
+        const AudioContextClass =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+
+        if (!AudioContextClass) {
+
+            if (blowText) {
+
+                blowText.textContent =
+                    "⚠️ Audio detection is not supported.";
+            }
+
+            showManualBlowButton();
+
+            stopMicrophone();
+
+            return;
+        }
+
+
+        audioContext =
+            new AudioContextClass();
+
+
+        /* -----------------------------------------
+           Resume AudioContext
+        ----------------------------------------- */
+
+        if (
+            audioContext.state ===
+            "suspended"
+        ) {
+
+            await audioContext.resume();
+        }
+
+
+        console.log(
+            "AudioContext:",
+            audioContext.state
+        );
+
+
+        /* -----------------------------------------
+           Create microphone source
+        ----------------------------------------- */
+
+        microphone =
+            audioContext.createMediaStreamSource(
+                micStream
+            );
+
+
+        /* -----------------------------------------
+           Create analyser
+        ----------------------------------------- */
+
+        analyser =
+            audioContext.createAnalyser();
+
+
+        analyser.fftSize =
+            2048;
+
+
+        analyser.smoothingTimeConstant =
+            0.15;
+
+
+        timeData =
+            new Uint8Array(
+                analyser.fftSize
+            );
+
+
+        frequencyData =
+            new Uint8Array(
+                analyser.frequencyBinCount
+            );
+
+
+        microphone.connect(
+            analyser
+        );
+
+
+        isListening =
+            true;
+
+        candleBlown =
+            false;
+
+        blowFrames =
+            0;
+
+
+        startBtn.style.display =
+            "none";
+
+
+        if (blowText) {
+
+            blowText.textContent =
+                "🎤 Listening... stay quiet for a moment";
+        }
+
+
+        /* -----------------------------------------
+           Calibrate microphone
+        ----------------------------------------- */
+
+        calibrateMicrophone();
+
     }
 
-    const average =
-        sum / dataArray.length;
+    catch (error) {
+
+        console.error(
+            "Microphone error:",
+            error
+        );
 
 
-    console.log("Mic level:", average);
+        if (blowText) {
+
+            if (
+                error.name ===
+                "NotAllowedError"
+            ) {
+
+                blowText.textContent =
+                    "⚠️ Microphone permission was denied. Please allow it and try again.";
+
+            } else {
+
+                blowText.textContent =
+                    "⚠️ Could not start the microphone. Please try again.";
+            }
+        }
 
 
-    // Adjust this if necessary
-    if (average > 55) {
+        showManualBlowButton();
+    }
+}
+
+
+/* =====================================================
+   MICROPHONE CALIBRATION
+===================================================== */
+
+function calibrateMicrophone() {
+
+    if (
+        !isListening ||
+        !analyser
+    ) {
+        return;
+    }
+
+
+    let total =
+        0;
+
+    let samples =
+        0;
+
+    const startTime =
+        performance.now();
+
+
+    function collectNoise() {
+
+        if (
+            !isListening ||
+            candleBlown
+        ) {
+            return;
+        }
+
+
+        analyser.getByteTimeDomainData(
+            timeData
+        );
+
+
+        let sumSquares =
+            0;
+
+
+        for (
+            let i = 0;
+            i < timeData.length;
+            i++
+        ) {
+
+            const value =
+                (timeData[i] - 128) /
+                128;
+
+
+            sumSquares +=
+                value * value;
+        }
+
+
+        const rms =
+            Math.sqrt(
+                sumSquares /
+                timeData.length
+            );
+
+
+        total +=
+            rms;
+
+        samples++;
+
+
+        const elapsed =
+            performance.now() -
+            startTime;
+
+
+        if (elapsed < 1200) {
+
+            if (blowText) {
+
+                blowText.textContent =
+                    "🎤 Keep quiet... preparing microphone...";
+            }
+
+
+            requestAnimationFrame(
+                collectNoise
+            );
+
+            return;
+        }
+
+
+        noiseLevel =
+            samples > 0
+                ? total / samples
+                : 0.015;
+
+
+        /*
+           Prevent an extremely high
+           background level from making
+           detection impossible.
+        */
+
+        noiseLevel =
+            Math.min(
+                noiseLevel,
+                0.08
+            );
+
+
+        console.log(
+            "🎤 Background noise:",
+            noiseLevel.toFixed(4)
+        );
+
+
+        if (blowText) {
+
+            blowText.textContent =
+                "💨 Now blow toward your microphone!";
+        }
+
+
+        detectBlow();
+    }
+
+
+    collectNoise();
+}
+
+
+/* =====================================================
+   CALCULATE MICROPHONE LEVEL
+===================================================== */
+
+function getMicrophoneLevel() {
+
+    if (!analyser) {
+        return {
+            rms: 0,
+            peak: 0,
+            frequencyAverage: 0
+        };
+    }
+
+
+    analyser.getByteTimeDomainData(
+        timeData
+    );
+
+
+    let sumSquares =
+        0;
+
+    let peak =
+        0;
+
+
+    for (
+        let i = 0;
+        i < timeData.length;
+        i++
+    ) {
+
+        const value =
+            Math.abs(
+                (timeData[i] - 128) /
+                128
+            );
+
+
+        sumSquares +=
+            value * value;
+
+
+        if (value > peak) {
+
+            peak =
+                value;
+        }
+    }
+
+
+    const rms =
+        Math.sqrt(
+            sumSquares /
+            timeData.length
+        );
+
+
+    analyser.getByteFrequencyData(
+        frequencyData
+    );
+
+
+    let frequencySum =
+        0;
+
+
+    for (
+        let i = 0;
+        i < frequencyData.length;
+        i++
+    ) {
+
+        frequencySum +=
+            frequencyData[i];
+    }
+
+
+    const frequencyAverage =
+        frequencyData.length > 0
+            ? frequencySum /
+              frequencyData.length
+            : 0;
+
+
+    return {
+        rms: rms,
+        peak: peak,
+        frequencyAverage:
+            frequencyAverage
+    };
+}
+
+
+/* =====================================================
+   DETECT BLOW
+===================================================== */
+
+function detectBlow() {
+
+    if (
+        !isListening ||
+        candleBlown ||
+        !analyser
+    ) {
+        return;
+    }
+
+
+    const level =
+        getMicrophoneLevel();
+
+
+    const rms =
+        level.rms;
+
+    const peak =
+        level.peak;
+
+    const frequencyAverage =
+        level.frequencyAverage;
+
+
+    /*
+       Dynamic threshold.
+
+       This is intentionally not too high
+       because phone microphones often
+       behave differently from laptop
+       microphones.
+    */
+
+    const dynamicThreshold =
+        Math.max(
+            noiseLevel + 0.018,
+            0.035
+        );
+
+
+    /*
+       A blow usually produces a stronger
+       broad microphone signal.
+
+       We use more than one condition so
+       normal tiny background sounds are
+       less likely to trigger it.
+    */
+
+    const loudEnough =
+        rms > dynamicThreshold;
+
+    const strongPeak =
+        peak > 0.18;
+
+    const strongSound =
+        frequencyAverage > 8;
+
+
+    const isBlow =
+        loudEnough &&
+        (
+            strongPeak ||
+            strongSound
+        );
+
+
+    if (isBlow) {
+
+        blowFrames += 1;
+
+    } else {
+
+        blowFrames =
+            Math.max(
+                0,
+                blowFrames - 1
+            );
+    }
+
+
+    /*
+       Display microphone level.
+       This is useful while testing
+       on your phone.
+    */
+
+    if (blowText) {
+
+        blowText.textContent =
+            `💨 Blow now! Level: ${rms.toFixed(3)}`;
+    }
+
+
+    console.log(
+        "Mic level:",
+        rms.toFixed(3),
+        "Peak:",
+        peak.toFixed(3),
+        "Frequency:",
+        frequencyAverage.toFixed(1),
+        "Threshold:",
+        dynamicThreshold.toFixed(3),
+        "Frames:",
+        blowFrames
+    );
+
+
+    /*
+       Four consecutive readings are
+       required before candles blow out.
+    */
+
+    if (blowFrames >= 4) {
 
         blowOutCandles();
 
         return;
     }
 
-    requestAnimationFrame(detectBlow);
+
+    requestAnimationFrame(
+        detectBlow
+    );
 }
 
 
-/* ==========================================
-   BLOW OUT CANDLES
-========================================== */
+/* =====================================================
+   STOP MICROPHONE
+===================================================== */
 
-// function blowOutCandles() {
+function stopMicrophone() {
 
-//     candleBlown = true;
-//     isListening = false;
-
-//     // Stop microphone
-//     if (microphone) {
-//         microphone.disconnect();
-//     }
+    isListening =
+        false;
 
 
-//     /* --------------------------------------
-//        Blow out candles one by one
-//     -------------------------------------- */
-
-//     candles.forEach((candle, index) => {
-
-//         setTimeout(() => {
-
-//             candle.classList.add("blown");
-
-//         }, index * 200);
-
-//     });
-
-
-//     blowText.textContent =
-//         "🎉 Wish made! Happy Birthday! ❤️";
-
-
-//     /* --------------------------------------
-//        PLAY SONG
-//     -------------------------------------- */
-
-//     setTimeout(() => {
-
-//         birthdaySong.currentTime = 0;
-
-//         birthdaySong.muted = false;
-
-//         birthdaySong.volume = 0.8;
-
-//         const playPromise =
-//             birthdaySong.play();
-
-//         if (playPromise !== undefined) {
-
-//             playPromise
-//                 .then(() => {
-
-//                     console.log(
-//                         "🎵 Birthday song is playing!"
-//                     );
-
-//                 })
-//                 .catch(error => {
-
-//                     console.error(
-//                         "Song playback failed:",
-//                         error
-//                     );
-
-//                     blowText.textContent =
-//                         "🎵 Click anywhere to start the birthday song.";
-
-//                 });
-
-//         }
-
-//     }, 800);
-
-
-//     /* --------------------------------------
-//        Birthday message
-//     -------------------------------------- */
-
-//     setTimeout(() => {
-
-//         birthdayMessage.classList.remove("hidden");
-
-//         createConfetti();
-
-//     }, 1200);
-
-// }
-function blowOutCandles() {
-
-    candleBlown = true;
-    isListening = false;
-
-
-    // Stop microphone
     if (microphone) {
-        microphone.disconnect();
+
+        try {
+
+            microphone.disconnect();
+
+        }
+
+        catch (error) {
+
+            console.log(
+                "Microphone disconnect error:",
+                error
+            );
+        }
+
+        microphone =
+            null;
     }
 
 
-    /* =================================
-       BLOW OUT CANDLES ONE BY ONE
-    ================================= */
+    if (micStream) {
 
-    candles.forEach((candle, index) => {
+        micStream
+            .getTracks()
+            .forEach(track => {
 
-        setTimeout(() => {
-
-            candle.classList.add("blown");
-
-        }, index * 250);
-
-    });
+                track.stop();
+            });
 
 
-    blowText.textContent =
-        "🎉 Wish made! ❤️";
+        micStream =
+            null;
+    }
+}
 
 
-    /* =================================
-       PLAY BIRTHDAY SONG
-    ================================= */
+/* =====================================================
+   BLOW OUT CANDLES
+===================================================== */
+
+function blowOutCandles() {
+
+    if (candleBlown) {
+        return;
+    }
+
+
+    candleBlown =
+        true;
+
+
+    stopMicrophone();
+
+
+    /* -----------------------------------------
+       Blow out candles one by one
+    ----------------------------------------- */
+
+    candles.forEach(
+        (candle, index) => {
+
+            setTimeout(() => {
+
+                candle.classList.add(
+                    "blown"
+                );
+
+            }, index * 220);
+        }
+    );
+
+
+    if (blowText) {
+
+        blowText.textContent =
+            "🎉 Wish made! Happy Birthday, My Love! ❤️";
+    }
+
+
+    /* -----------------------------------------
+       Phone vibration
+    ----------------------------------------- */
+
+    if (
+        navigator.vibrate
+    ) {
+
+        navigator.vibrate([
+            60,
+            40,
+            100
+        ]);
+    }
+
+
+    /* -----------------------------------------
+       Birthday song
+    ----------------------------------------- */
 
     setTimeout(() => {
 
-        birthdaySong.currentTime = 0;
+        playBirthdaySong();
 
-        birthdaySong.volume = 0.8;
+    }, 900);
 
-        birthdaySong.muted = false;
 
-        birthdaySong.play()
+    /* -----------------------------------------
+       Birthday message + effects
+    ----------------------------------------- */
+
+    setTimeout(() => {
+
+        if (birthdayMessage) {
+
+            birthdayMessage.classList.remove(
+                "hidden"
+            );
+        }
+
+
+        createConfetti();
+
+
+        createCrackerBurst();
+
+
+        playCrackerSound();
+
+
+    }, 1200);
+}
+
+
+/* =====================================================
+   PLAY BIRTHDAY SONG
+===================================================== */
+
+function playBirthdaySong() {
+
+    if (!birthdaySong) {
+
+        console.log(
+            "Birthday audio element not found."
+        );
+
+        return;
+    }
+
+
+    birthdaySong.currentTime =
+        0;
+
+    birthdaySong.volume =
+        0.8;
+
+    birthdaySong.muted =
+        false;
+
+
+    const playPromise =
+        birthdaySong.play();
+
+
+    if (playPromise !== undefined) {
+
+        playPromise
             .then(() => {
 
-                console.log("🎵 Song started!");
+                audioUnlocked =
+                    true;
+
+                console.log(
+                    "🎵 HAPPY BIRTHDAY SONG STARTED!"
+                );
 
             })
             .catch(error => {
 
                 console.error(
-                    "Song could not play:",
+                    "Birthday song was blocked:",
                     error
                 );
 
+
+                /*
+                   If the browser blocks
+                   automatic playback, show
+                   a button the user can tap.
+                */
+
+                showPlaySongButton();
             });
-
-    }, 700);
-
-
-    /* =================================
-       SHOW YOUR LOVE MESSAGE
-    ================================= */
-
-    setTimeout(() => {
-
-        birthdayMessage.classList.remove("hidden");
-
-        createConfetti();
-
-    }, 900);
-
-}
-
-
-/* ==========================================
-   CONFETTI
-========================================== */
-
-function createConfetti() {
-
-    for (let i = 0; i < 80; i++) {
-
-        const confetti =
-            document.createElement("div");
-
-        confetti.innerHTML = "✨";
-
-        confetti.style.position = "fixed";
-
-        confetti.style.left =
-            Math.random() * 100 + "vw";
-
-        confetti.style.top = "-20px";
-
-        confetti.style.fontSize =
-            Math.random() * 20 + 10 + "px";
-
-        confetti.style.zIndex = "200";
-
-        confetti.style.animation =
-            `fall ${Math.random() * 3 + 2}s linear forwards`;
-
-        document.body.appendChild(confetti);
-
-        setTimeout(() => {
-            confetti.remove();
-        }, 5000);
     }
 }
 
+
+/* =====================================================
+   MANUAL CANDLE FALLBACK
+===================================================== */
+
+function showManualBlowButton() {
+
+    let manualButton =
+        document.getElementById(
+            "manualBlowBtn"
+        );
+
+
+    if (manualButton) {
+
+        manualButton.classList.remove(
+            "hidden"
+        );
+
+        return;
+    }
+
+
+    manualButton =
+        document.createElement(
+            "button"
+        );
+
+
+    manualButton.id =
+        "manualBlowBtn";
+
+
+    manualButton.textContent =
+        "💨 Tap here to blow the candles";
+
+
+    manualButton.style.marginTop =
+        "15px";
+
+
+    manualButton.style.padding =
+        "14px 25px";
+
+
+    manualButton.style.border =
+        "none";
+
+
+    manualButton.style.borderRadius =
+        "30px";
+
+
+    manualButton.style.background =
+        "#ff4f91";
+
+
+    manualButton.style.color =
+        "white";
+
+
+    manualButton.style.fontSize =
+        "15px";
+
+
+    manualButton.style.cursor =
+        "pointer";
+
+
+    manualButton.style.boxShadow =
+        "0 0 20px rgba(255,79,145,.5)";
+
+
+    manualButton.addEventListener(
+        "click",
+        () => {
+
+            blowOutCandles();
+        }
+    );
+
+
+    if (
+        startBtn &&
+        startBtn.parentNode
+    ) {
+
+        startBtn.parentNode.appendChild(
+            manualButton
+        );
+    }
+}
+
+
+/* =====================================================
+   PLAY SONG FALLBACK BUTTON
+===================================================== */
+
+function showPlaySongButton() {
+
+    if (
+        document.getElementById(
+            "playBirthdaySongBtn"
+        )
+    ) {
+        return;
+    }
+
+
+    const button =
+        document.createElement(
+            "button"
+        );
+
+
+    button.id =
+        "playBirthdaySongBtn";
+
+
+    button.textContent =
+        "🎵 Play Birthday Song ❤️";
+
+
+    button.style.position =
+        "fixed";
+
+
+    button.style.bottom =
+        "25px";
+
+
+    button.style.left =
+        "50%";
+
+
+    button.style.transform =
+        "translateX(-50%)";
+
+
+    button.style.zIndex =
+        "2000";
+
+
+    button.style.padding =
+        "14px 25px";
+
+
+    button.style.border =
+        "none";
+
+
+    button.style.borderRadius =
+        "30px";
+
+
+    button.style.background =
+        "#ff4f91";
+
+
+    button.style.color =
+        "white";
+
+
+    button.style.fontSize =
+        "16px";
+
+
+    button.style.cursor =
+        "pointer";
+
+
+    button.style.boxShadow =
+        "0 0 20px rgba(255,79,145,.5)";
+
+
+    document.body.appendChild(
+        button
+    );
+
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            birthdaySong.currentTime =
+                0;
+
+            birthdaySong.volume =
+                0.8;
+
+            birthdaySong.muted =
+                false;
+
+
+            const playPromise =
+                birthdaySong.play();
+
+
+            if (
+                playPromise !== undefined
+            ) {
+
+                playPromise
+                    .then(() => {
+
+                        button.remove();
+
+                    })
+                    .catch(error => {
+
+                        console.error(
+                            "Birthday song could not play:",
+                            error
+                        );
+                    });
+            }
+        }
+    );
+}
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+function createConfetti() {
+
+    for (
+        let i = 0;
+        i < 80;
+        i++
+    ) {
+
+        const confetti =
+            document.createElement(
+                "div"
+            );
+
+
+        confetti.innerHTML =
+            "✨";
+
+
+        confetti.style.position =
+            "fixed";
+
+
+        confetti.style.left =
+            Math.random() *
+            100 +
+            "vw";
+
+
+        confetti.style.top =
+            "-20px";
+
+
+        confetti.style.fontSize =
+            Math.random() *
+            20 +
+            10 +
+            "px";
+
+
+        confetti.style.zIndex =
+            "200";
+
+
+        confetti.style.pointerEvents =
+            "none";
+
+
+        confetti.style.animation =
+            `fall ${
+                Math.random() * 3 + 2
+            }s linear forwards`;
+
+
+        document.body.appendChild(
+            confetti
+        );
+
+
+        setTimeout(() => {
+
+            confetti.remove();
+
+        }, 5000);
+    }
+}
 
 
 /* =====================================================
@@ -1179,20 +1717,20 @@ function createHearts() {
 
         heart.style.left =
             Math.random() *
-                100 +
+            100 +
             "vw";
 
 
         heart.style.fontSize =
             Math.random() *
-                20 +
+            20 +
             10 +
             "px";
 
 
         heart.style.animationDuration =
             Math.random() *
-                5 +
+            5 +
             5 +
             "s";
 
@@ -1252,20 +1790,25 @@ function createFireworks() {
         spark.style.position =
             "fixed";
 
+
         spark.style.left =
             "50%";
+
 
         spark.style.top =
             "50%";
 
+
         spark.style.fontSize =
             Math.random() *
-                20 +
+            20 +
             10 +
             "px";
 
+
         spark.style.zIndex =
             "100";
+
 
         spark.style.pointerEvents =
             "none";
@@ -1284,7 +1827,7 @@ function createFireworks() {
 
         const distance =
             Math.random() *
-                400 +
+            400 +
             100;
 
 
@@ -1328,7 +1871,6 @@ function createFireworks() {
                     easing:
                         "cubic-bezier(.2,.8,.3,1)"
                 }
-
             );
 
 
@@ -1336,7 +1878,6 @@ function createFireworks() {
             () => {
 
                 spark.remove();
-
             };
     }
 }
@@ -1369,18 +1910,14 @@ const observer =
                         observer.unobserve(
                             entry.target
                         );
-
                     }
-
                 }
             );
-
         },
 
         {
             threshold: 0.12
         }
-
     );
 
 
@@ -1405,5 +1942,4 @@ document
         observer.observe(
             element
         );
-
     });
